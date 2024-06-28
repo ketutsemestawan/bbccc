@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencarian Buku</title>
+    <style>
+        /* Styling sederhana untuk tampilan */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pencarian Buku</h1>
+    <input type="text" id="searchInput" placeholder="Cari judul buku...">
+    <button onclick="searchBooks()">Cari</button>
+
+    <div id="results">
+        <!-- Hasil pencarian akan muncul di sini -->
+    </div>
+
+    <script>
+        // Script JavaScript untuk melakukan pencarian buku
+        const books = [
+            { title: 'Pemrograman JavaScript', author: 'John Doe' },
+            { title: 'Belajar HTML & CSS', author: 'Jane Doe' },
+            { title: 'Panduan PHP Dasar', author: 'John Smith' },
+            // Tambahkan buku-buku lain di sini
+        ];
+
+        function searchBooks() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const filteredBooks = books.filter(book =>
+                book.title.toLowerCase().includes(searchQuery)
+            );
+
+            displayResults(filteredBooks);
+        }
+
+        function displayResults(results) {
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<p>Tidak ada hasil yang ditemukan.</p>';
+            } else {
+                const ul = document.createElement('ul');
+                results.forEach(book => {
+                    const li = document.createElement('li');
+                    li.textContent = `${book.title} - ${book.author}`;
+                    ul.appendChild(li);
+                });
+                resultsContainer.appendChild(ul);
+            }
+        }
+    </script>
+</body>
+</html>
